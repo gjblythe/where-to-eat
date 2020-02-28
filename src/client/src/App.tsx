@@ -1,26 +1,22 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {useEffect, useState} from 'react';
 import './App.css';
 
-function App() {
+export default () => {
+  const [user, setUser] = useState([]);
+  async function callExpress(name: string) {
+    const response = await fetch(`/api/say-hello/${name}`);
+      try {
+        response.json().then(res => setUser(res.message));
+      } catch(err) {
+        throw err;
+      }
+  }
+  useEffect(() => {
+    callExpress('Gmoney');
+  }, [user])
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      {user}
     </div>
   );
 }
-
-export default App;
