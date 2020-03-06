@@ -20,7 +20,7 @@ const options = {
 const {latitude, longitude, limit, radius} = params;
 const searchString =  `&latitude=${latitude}&longitude=${longitude}&limit=${limit}&radius=${radius}`;
 const search = `https://api.yelp.com/v3/businesses/search?term='food'${searchString}`;
-
+const zipLocal = `https://api.yelp.com/v3/businesses/search?term='food'&location=`
 @Controller('api/location')
 class DemoControler {
 
@@ -29,22 +29,28 @@ class DemoControler {
 
   @Get(':zip')
   private getLocationByZip(req: Request, res: Response) {
-    try {
-      const {zip} = req.params;
-      if (zip === 'make_it_fail') {
-        throw Error('User triggered failure');
+    const {zip} = req.params;
+    fetch(zipLocal.concat(zip), options)
+    .then(res =>  res.json()).then(data =>
+      {
+        const locations = data
+      try {
+        if (zip === 'make_it_fail') {
+          throw Error('User triggered failure');
+        }
+        Logger.Info(DemoControler.SUCCESS_MSG + zip);
+        return res.status(OK).json({
+          message: DemoControler.SUCCESS_MSG + zip,
+          locations,
+        });
+      } catch (err) {
+        Logger.Err(err, true);
+        return res.status(BAD_REQUEST).json({
+          error: err.message,
+        });
       }
-      Logger.Info(DemoControler.SUCCESS_MSG + zip);
-      return res.status(OK).json({
-        message: DemoControler.SUCCESS_MSG + zip,
-        
-      });
-    } catch (err) {
-      Logger.Err(err, true);
-      return res.status(BAD_REQUEST).json({
-        error: err.message,
-      });
     }
+    )
   }
 
   @Get('')
