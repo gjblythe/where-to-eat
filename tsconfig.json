@@ -20,7 +20,7 @@
     ]
   },
   "include": [
-    "./src/**/*.ts"
+    "./src/**/*.ts", "src/client/src/components/LocationCards.tsx"
   ],
   "exclude": [
     "./src/**/*.test.ts",
