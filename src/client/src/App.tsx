@@ -1,27 +1,14 @@
-import {Card, Container, Grid, makeStyles, Theme} from '@material-ui/core';
+import {Container, Grid, makeStyles, Theme} from '@material-ui/core';
 import React, {useEffect, useState} from 'react';
-import './App.css';
+import LocatioCards from './components/LocationCards';
+import {ILocationProps} from './domains/locations/index';
 
-interface ILocationProps {
-  id: string;
-  alias: string;
-  name: string;
-  rating: string;
-  is_closed: boolean
-  location: {
-    display_address: [],
-  };
-}
 interface IState {
   message: string;
   locations: ILocationProps[]
 }
 const useStyles = makeStyles((theme: Theme) => ({
-  card: {
-    width: 260,
-    height: 360,
-    margin: theme.spacing(2),
-  },
+
 }));
 
 export default () => {
@@ -39,15 +26,16 @@ export default () => {
       }
   }
   useEffect(() => {
-    getLocationZip('85022');
+    getLocationZip('85014');
   }, [])
   return (
     <Container maxWidth={'lg'}>
       <div>
         {state.message}
       </div>
-      <Grid container>
-        {state.locations.map(l => <Card className={classes.card} key={l.id}>{l.name}</Card>)}
+      <Grid container justify={'center'}>
+        {state.locations !== undefined 
+        && state.locations.map(location => <LocatioCards location={location}/>)}
       </Grid>
     </Container>
   );
