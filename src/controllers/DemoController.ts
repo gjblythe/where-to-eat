@@ -10,7 +10,7 @@ config();
 const params = {
   latitude: 33.652930,
   longitude: -111.931450,
-  limit: 1,
+  limit: 10,
   radius: 3000,
 }
 const options = { 
@@ -24,23 +24,23 @@ const zipLocal = `https://api.yelp.com/v3/businesses/search?term='food'&location
 @Controller('api/location')
 class DemoControler {
 
-  public static readonly SUCCESS_MSG = 'Zipcode ';
-  public static readonly SUCCESS_LOCATION = 'Location Fetched...';
+  public static readonly SUCCESS_MSG = 'Success! Results for ';
+  public static readonly SUCCESS_LOCATION = 'Some Places by work...';
 
-  @Get(':zip')
-  private getLocationByZip(req: Request, res: Response) {
-    const {zip} = req.params;
-    fetch(zipLocal.concat(zip), options)
+  @Get(':location')
+  private getLocation(req: Request, res: Response) {
+    const {location} = req.params;
+    fetch(zipLocal.concat(location), options)
     .then(res =>  res.json()).then(data =>
       {
         const locations = data
       try {
-        if (zip === 'make_it_fail') {
+        if (location === 'make_it_fail') {
           throw Error('User triggered failure');
         }
-        Logger.Info(DemoControler.SUCCESS_MSG + zip);
+        Logger.Info(DemoControler.SUCCESS_MSG + location);
         return res.status(OK).json({
-          message: DemoControler.SUCCESS_MSG + zip,
+          message: DemoControler.SUCCESS_MSG + location,
           locations,
         });
       } catch (err) {
