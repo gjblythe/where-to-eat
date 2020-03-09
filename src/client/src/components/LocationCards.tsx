@@ -1,4 +1,4 @@
-import {Card, CardContent, CardMedia, makeStyles, Theme, Typography} from '@material-ui/core';
+import {Card, CardContent, makeStyles, Theme, Typography} from '@material-ui/core';
 import React from 'react';
 import {ILocationProps} from '../domains/locations/index';
 
