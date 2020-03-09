@@ -1,8 +1,9 @@
 import {Container, Grid, makeStyles, Theme, Typography} from '@material-ui/core';
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import LocationCards from './components/LocationCards';
 import {ILocationProps} from './domains/locations/index';
 import SearchLocations from './components/SearchForm';
+import AppBar from './components/AppBar';
 
 interface IState {
   message: string;
@@ -27,16 +28,18 @@ export default () => {
       }
   }
   return (
-    <Container maxWidth={'lg'}>
-      <div>
-        {state.message}
-      </div>
+    <>
+      <AppBar
+        message={state.message}
+      />
       <SearchLocations onSubmit={getLocation}/>
-      <Grid container justify={'center'}>
-        {state.locations !== undefined 
-        ? state.locations.map(location => <LocationCards location={location}/>)
-        : <Typography variant={'h6'}>No locations found...</Typography>}
-      </Grid>
-    </Container>
+      <Container maxWidth={'lg'}>
+        <Grid container justify={'center'}>
+          {state.locations !== undefined 
+          ? state.locations.map(location => <LocationCards location={location}/>)
+          : <Typography variant={'h6'}>No locations found...</Typography>}
+        </Grid>
+      </Container>
+    </>
   );
 }
