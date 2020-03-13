@@ -1,4 +1,4 @@
-import {Button, makeStyles, Paper, TextField, Theme}  from '@material-ui/core';
+import {Button, Container, makeStyles, Paper, TextField, Theme}  from '@material-ui/core';
 import React, {useState} from 'react';
 
 interface IProps {
@@ -11,6 +11,9 @@ const useStyles = makeStyles((theme: Theme) => ({
  field: {
   padding: theme.spacing(1),
  },
+ button: {
+  margin: theme.spacing(1),
+ }
 }));
 export default ({onSubmit}: IProps) => {
 const classes = useStyles();
@@ -22,22 +25,27 @@ const searchLocation = () => {
   onSubmit(searchQuery)
 };
   return (
-    <Paper className={classes.form}>
-      <TextField 
-        className={classes.field}
-        label={'Location'}
-        helperText={'enter a Location...city or zip'}
-        variant={'outlined'}
-        onChange={handleChange}
-      />
-      <Button
-        color={'primary'}
-        variant={'outlined'}
-        onClick={searchLocation}
-      >
-        Submit
-      </Button>
-    </Paper>
+    <Container maxWidth={'md'}>
+      <Paper className={classes.form}>
+        <div>
+          <TextField 
+            className={classes.field}
+            label={'Location'}
+            helperText={'enter a Location...city or zip'}
+            variant={'outlined'}
+            onChange={handleChange}
+          />
+        </div>
+        <Button
+          className={classes.button}
+          color={'primary'}
+          variant={'contained'}
+          onClick={searchLocation}
+        >
+          Submit
+        </Button>
+      </Paper>
+    </Container>
   );
 };
 
