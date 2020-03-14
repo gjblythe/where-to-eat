@@ -24,8 +24,9 @@ export default ({location}: IProps) => {
     <Card className={classes.card}key={location.id}>
       <img className={classes.image} src={location.image_url}/>
       <CardContent>
-        <Typography>{location.name}</Typography>
+        <Typography><a href={location.url}>{location.name}</a></Typography>
         <Typography>Rating :{location.rating}</Typography>
+        <Typography>{location.price}</Typography>
         <Typography>{location.location.display_address}</Typography>
       </CardContent>
     </Card>
