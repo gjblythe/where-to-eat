@@ -5,6 +5,8 @@ export interface ILocationProps{
   rating: string;
   is_closed: boolean;
   image_url: string;
+  price: string;
+  url: string;
   location: {
     display_address: [],
   };
