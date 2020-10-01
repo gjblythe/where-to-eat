@@ -1,4 +1,4 @@
-export interface ILocationProps{
+export interface ILocationProps {
   id: string;
   alias: string;
   name: string;
@@ -10,4 +10,10 @@ export interface ILocationProps{
   location: {
     display_address: [],
   };
+}
+
+export interface ISearchProps {
+  searchQuery: string;
+  limit: number;
+  text: string;
 }
