@@ -22,6 +22,7 @@ class DemoControler {
   @Get(':location')
   private getLocation(req: Request, res: Response) {
     const {location} = req.params;
+    console.log(location);
     fetch(zipLocal.concat(location), options)
     .then(res =>  res.json()).then(data =>
       {
