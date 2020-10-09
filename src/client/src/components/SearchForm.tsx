@@ -1,6 +1,7 @@
-import {Button, Container, Grid, makeStyles, Paper, TextField, Theme}  from '@material-ui/core';
+import {Button, Checkbox, Container, FormControlLabel, Grid, makeStyles, Paper, TextField, Theme}  from '@material-ui/core';
 import React, {useState, useEffect} from 'react';
 import {ISearchProps} from '../domains/locations';
+import { ThemeProvider, withStyles } from '@material-ui/core/styles';
 
 interface IProps {
   onSubmit: (props: string) => Promise<void>;
@@ -22,6 +23,7 @@ const classes = useStyles();
 const [state, setState] = useState<ISearchProps>({
   searchQuery: '',
   limit: 0,
+  category: 'all',
   text: '',
 })
 
@@ -29,9 +31,12 @@ const [searchQuery, setSearchQuery] = useState('');
 const handleChange = (prop: keyof ISearchProps) => (event: React.ChangeEvent<HTMLInputElement>) => {
   setState({...state, [prop]: event.target.value});
 };
+const updateCategory = (event: React.ChangeEvent<HTMLInputElement>) => {
+  setState({...state,category: event.target.checked? 'vegan,vegetarian':'all' });
+};
 const searchLocation = () => {
-  const {searchQuery, limit, text} = state;
-  const query = (limit?: number, text?: string) => `${searchQuery}&limit=${limit || 20}`;
+  const {searchQuery, limit, category, text} = state;
+  const query = (limit?: number, text?: string) => `${searchQuery}&categories=${category}&limit=${limit || 20}`;
   onSubmit(query(limit, text));
 };
   return (
@@ -55,9 +60,19 @@ const searchLocation = () => {
               variant={'outlined'}
               onChange={handleChange('limit')}
             />
+            <FormControlLabel
+              control={
+            <Checkbox
+              color={'primary'}
+              onChange={updateCategory}
+            />}
+            label="Vegetarian/Vegan"
+            />
         </Grid>
-        {state.limit}
+
         {state.searchQuery}
+        {state.limit}           
+        {state.category}     
         {state.text}
         <Button
           className={classes.button}

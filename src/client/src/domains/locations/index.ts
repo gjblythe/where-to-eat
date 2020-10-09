@@ -16,4 +16,5 @@ export interface ISearchProps {
   searchQuery: string;
   limit: number;
   text: string;
+  category: string;
 }
