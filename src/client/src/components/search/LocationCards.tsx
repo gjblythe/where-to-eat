@@ -1,6 +1,6 @@
 import {Card, CardContent, makeStyles, Theme, Typography} from '@material-ui/core';
 import React from 'react';
-import {ILocationProps} from '../domains/locations/index';
+import {ILocationProps} from '../../domains/locations/index';
 
 interface IProps {
   location: ILocationProps;
