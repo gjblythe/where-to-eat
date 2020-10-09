@@ -1,6 +1,6 @@
 import {Button, Checkbox, Container, FormControlLabel, Grid, makeStyles, Paper, TextField, Theme}  from '@material-ui/core';
 import React, {useState, useEffect} from 'react';
-import {ISearchProps} from '../domains/locations';
+import {ISearchProps} from '../../domains/locations';
 import { ThemeProvider, withStyles } from '@material-ui/core/styles';
 
 interface IProps {
@@ -69,11 +69,6 @@ const searchLocation = () => {
             label="Vegetarian/Vegan"
             />
         </Grid>
-
-        {state.searchQuery}
-        {state.limit}           
-        {state.category}     
-        {state.text}
         <Button
           className={classes.button}
           color={'primary'}
