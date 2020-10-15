@@ -1,4 +1,4 @@
-import {Button, Checkbox, Container, FormControlLabel, Grid, makeStyles, Paper, TextField, Theme}  from '@material-ui/core';
+import {Button, Container, FormControlLabel, Grid, makeStyles, Paper, Switch, TextField, Theme}  from '@material-ui/core';
 import React, {useState, useEffect} from 'react';
 import {ISearchProps} from '../../domains/locations';
 import { ThemeProvider, withStyles } from '@material-ui/core/styles';
@@ -62,7 +62,7 @@ const searchLocation = () => {
             />
             <FormControlLabel
               control={
-            <Checkbox
+            <Switch
               color={'primary'}
               onChange={updateCategory}
             />}
