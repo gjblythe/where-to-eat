@@ -22,7 +22,7 @@ export default ({location}: IProps) => {
   const classes = useStyles();
   return (
     <Card className={classes.card}key={location.id}>
-      <img className={classes.image} src={location.image_url}/>
+      <img className={classes.image} src={location.image_url} alt={location.name}/>
       <CardContent>
         <Typography><a href={location.url}>{location.name}</a></Typography>
         <Typography>Rating :{location.rating}</Typography>

@@ -1,11 +1,13 @@
 import {Button, Container, FormControlLabel, Grid, makeStyles, Paper, Switch, TextField, Theme}  from '@material-ui/core';
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import {ISearchProps} from '../../domains/locations';
-import { ThemeProvider, withStyles } from '@material-ui/core/styles';
 
 interface IProps {
   onSubmit: (props: string) => Promise<void>;
+  savedSearch: ISearchProps[];
+  setSavedSearch: (search: ISearchProps[]) => void;
 }
+
 const useStyles = makeStyles((theme: Theme) => ({
  form: {
   margin: theme.spacing(2),
@@ -18,25 +20,28 @@ const useStyles = makeStyles((theme: Theme) => ({
   margin: theme.spacing(1),
  }
 }));
-export default ({onSubmit}: IProps) => {
+
+export default ({onSubmit, savedSearch, setSavedSearch}: IProps) => {
 const classes = useStyles();
-const [state, setState] = useState<ISearchProps>({
+const [search, setSearch] = useState<ISearchProps>({
   searchQuery: '',
   limit: 0,
   category: 'all',
   text: '',
-})
+});
 
-const [searchQuery, setSearchQuery] = useState('');
 const handleChange = (prop: keyof ISearchProps) => (event: React.ChangeEvent<HTMLInputElement>) => {
-  setState({...state, [prop]: event.target.value});
+  setSearch({...search, [prop]: event.target.value});
 };
+
 const updateCategory = (event: React.ChangeEvent<HTMLInputElement>) => {
-  setState({...state,category: event.target.checked? 'vegan,vegetarian':'all' });
+  setSearch({...search, category: event.target.checked? 'vegan,vegetarian':'all' });
 };
+
 const searchLocation = () => {
-  const {searchQuery, limit, category, text} = state;
+  const {searchQuery, limit, category, text} = search;
   const query = (limit?: number, text?: string) => `${searchQuery}&categories=${category}&limit=${limit || 20}`;
+  setSavedSearch(savedSearch.concat(search));
   onSubmit(query(limit, text));
 };
   return (
