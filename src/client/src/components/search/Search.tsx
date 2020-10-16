@@ -1,14 +1,14 @@
 import { Container, Grid, Typography } from '@material-ui/core';
 import React, {useState} from 'react';
 import AppPage from '../AppPage'
-import { ILocationProps } from '../../domains/locations';
+import { ILocationProps, ISearchProps } from '../../domains/locations';
 import LocationCards from './LocationCards';
 import SearchForm from './SearchForm';
-
+import SavedSearches from './SavedSearches';
 
 interface IState {
   message: string;
-  locations: ILocationProps[]
+  locations: ILocationProps[];
 }
 
 export default () => {
@@ -16,6 +16,7 @@ export default () => {
     message: '',
     locations: [],
   });
+  const [savedSearch, setSavedSearch] = useState<ISearchProps[]>([]);
   async function getLocation(search: string) {
     const response = await fetch(`/api/location/${search}`);
       try {
@@ -26,7 +27,14 @@ export default () => {
   }
   return (
     <AppPage title={'Search Locations'}>
-      <SearchForm onSubmit={getLocation}/>
+      <Grid container>
+        <Grid item={true} xs={8}>
+          <SearchForm onSubmit={getLocation} setSavedSearch={setSavedSearch} savedSearch={savedSearch}/>
+        </Grid>
+        <Grid item={true} xs={4}>
+         <SavedSearches savedSearch={savedSearch}/>
+        </Grid>
+      </Grid>
       <Container maxWidth={'lg'}>
         <Grid container justify={'center'}>
           {state.locations !== undefined 
