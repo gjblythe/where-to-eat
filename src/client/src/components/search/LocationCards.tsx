@@ -9,7 +9,7 @@ interface IProps {
 const useStyles = makeStyles((theme: Theme) => ({
   card: {
     width: 260,
-    height: 360,
+    height: 380,
     margin: theme.spacing(2),
   },
   image: {

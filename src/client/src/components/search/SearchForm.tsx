@@ -43,8 +43,9 @@ const searchLocation = () => {
     <Container maxWidth={'md'}>
       <Paper className={classes.form}>
         <Grid container>
-          <Grid item xs={3}>
+          <Grid item xs={12} sm={6}>
             <TextField
+              fullWidth={true}
               className={classes.field}
               label={'Location'}
               helperText={'enter a Location...city or zip'}
@@ -52,7 +53,9 @@ const searchLocation = () => {
               onChange={handleChange('searchQuery')}
             />
           </Grid>
+          <Grid item xs={12} sm={3}>
             <TextField
+              fullWidth={true}
               inputProps={{type: 'number', min: '1', max: '50'}}
               className={classes.field}
               label={'Limit'}
@@ -60,7 +63,10 @@ const searchLocation = () => {
               variant={'outlined'}
               onChange={handleChange('limit')}
             />
+          </Grid>
+          <Grid item xs={12} sm={1}>
             <FormControlLabel
+              className={classes.field}
               control={
             <Switch
               color={'primary'}
@@ -68,6 +74,7 @@ const searchLocation = () => {
             />}
             label="Vegetarian/Vegan"
             />
+          </Grid>
         </Grid>
         <Button
           className={classes.button}
