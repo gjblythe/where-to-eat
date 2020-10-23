@@ -1,6 +1,7 @@
-import {Card, CardContent, makeStyles, Theme, Typography} from '@material-ui/core';
+import {Card, CardContent, Link, makeStyles, Theme, Typography} from '@material-ui/core';
 import React from 'react';
 import {ILocationProps} from '../../domains/locations/index';
+import {stars} from '../shared/yelpStars';
 
 interface IProps {
   location: ILocationProps;
@@ -24,8 +25,10 @@ export default ({location}: IProps) => {
     <Card className={classes.card}key={location.id}>
       <img className={classes.image} src={location.image_url} alt={location.name}/>
       <CardContent>
-        <Typography><a href={location.url}>{location.name}</a></Typography>
-        <Typography>Rating :{location.rating}</Typography>
+        <Link href={location.url} target={'blank'}>{location.name}</Link>
+        <div>
+          <img src={stars(location.rating)} alt={`${location.name} image`}></img>
+        </div>
         <Typography>{location.price}</Typography>
         <Typography>{location.location.display_address}</Typography>
       </CardContent>

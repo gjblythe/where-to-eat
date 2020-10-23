@@ -4,7 +4,7 @@ import AppPage from '../AppPage'
 import { ILocationProps, ISearchProps } from '../../domains/locations';
 import LocationCards from './LocationCards';
 import SearchForm from './SearchForm';
-import SavedSearches from './SavedSearches';
+// import SavedSearches from './SavedSearches';
 
 interface IState {
   message: string;
@@ -28,11 +28,8 @@ export default () => {
   return (
     <AppPage title={'Search Locations'}>
       <Grid container>
-        <Grid item={true} xs={8}>
+        <Grid item={true} xs={12}>
           <SearchForm onSubmit={getLocation} setSavedSearch={setSavedSearch} savedSearch={savedSearch}/>
-        </Grid>
-        <Grid item={true} xs={4}>
-         <SavedSearches savedSearch={savedSearch}/>
         </Grid>
       </Grid>
       <Container maxWidth={'lg'}>
@@ -40,6 +37,9 @@ export default () => {
           {state.locations !== undefined 
           ? state.locations.map(location => <LocationCards location={location}/>)
           : <Typography variant={'h6'}>No locations found...</Typography>}
+        </Grid>
+        <Grid item={true} xs={12}>
+         {/* <SavedSearches savedSearch={savedSearch}/>  // this will be implemented at a later date */}
         </Grid>
       </Container>
     </AppPage>
