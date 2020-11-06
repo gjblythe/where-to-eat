@@ -1,25 +1,25 @@
-import firebase from 'firebase';
 import React from 'react';
 import {Redirect, Route, Switch} from 'react-router';
-import Login from './Login';
+import Login from './SignIn';
 import Search from './search/Search';
 import Settings from './settings/Settings';
 
 interface IProps {
-  user: firebase.User | null;
+  user: firebase.default.User;
+  loading: boolean;
 }
 
-export default ({user}: IProps) => {
+export default ({user, loading}: IProps) => {
   return (
     <Switch>
       <Route exact path={'/'}>
-        {user !== null ? <Search/> : <Redirect to={'/login'}/>}
+        {user ? <Search loading={loading} user={user}/> : <Redirect to={'/login'}/>}
       </Route>
       <Route path={'/settings'}>
-        <Settings/>
+        {user ? <Settings user={user}/> : <Redirect to={'/login'}/>}
       </Route>
       <Route to={'/login'}>
-        <Login user={user}/>
+        {!user ? <Login loading={loading}/> : <Redirect to={'/'}/>}
       </Route>
     </Switch>
   );

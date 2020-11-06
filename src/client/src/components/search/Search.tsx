@@ -4,14 +4,19 @@ import AppPage from '../AppPage'
 import { ILocationProps, ISearchProps } from '../../domains/locations';
 import LocationCards from './LocationCards';
 import SearchForm from './SearchForm';
+import LoadingSpinner from '../shared/LoadingSpinner';
 // import SavedSearches from './SavedSearches';
 
+interface IProps {
+  loading: boolean;
+  user: firebase.default.User;
+}
 interface IState {
   message: string;
   locations: ILocationProps[];
 }
 
-export default () => {
+export default ({loading, user}: IProps) => {
   const [state, setState] = useState<IState>({
     message: '',
     locations: [],
@@ -26,22 +31,29 @@ export default () => {
       }
   }
   return (
-    <AppPage title={'Search Locations'}>
-      <Grid container>
-        <Grid item={true} xs={12}>
-          <SearchForm onSubmit={getLocation} setSavedSearch={setSavedSearch} savedSearch={savedSearch}/>
-        </Grid>
-      </Grid>
-      <Container maxWidth={'lg'}>
-        <Grid container justify={'center'}>
-          {state.locations !== undefined 
-          ? state.locations.map(location => <LocationCards location={location}/>)
-          : <Typography variant={'h6'}>No locations found...</Typography>}
-        </Grid>
-        <Grid item={true} xs={12}>
-         {/* <SavedSearches savedSearch={savedSearch}/>  // this will be implemented at a later date */}
-        </Grid>
-      </Container>
+    <AppPage title={'Search Locations'} user={user}>
+      {loading 
+        ? 
+          <LoadingSpinner/>
+        :
+        <>
+          <Grid container>
+            <Grid item={true} xs={12}>
+              <SearchForm onSubmit={getLocation} setSavedSearch={setSavedSearch} savedSearch={savedSearch}/>
+            </Grid>
+          </Grid>
+          <Container maxWidth={'lg'}>
+            <Grid container justify={'center'}>
+              {state.locations !== undefined 
+              ? state.locations.map(location => <LocationCards location={location}/>)
+              : <Typography variant={'h6'}>No locations found...</Typography>}
+            </Grid>
+            <Grid item={true} xs={12}>
+            {/* <SavedSearches savedSearch={savedSearch}/>  // this will be implemented at a later date */}
+            </Grid>
+          </Container>
+        </>
+      }
     </AppPage>
   );
 };

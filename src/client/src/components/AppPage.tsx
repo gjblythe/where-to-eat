@@ -4,14 +4,15 @@ import AppBar from './AppBar';
 interface IProps {
   title: string;
   children: React.ReactNode;
+  user?: firebase.default.User;
 }
-export default ({title, children}: IProps) => {
+export default ({title, children, user}: IProps) => {
   return (
-  <>
-    <AppBar title={title}/>
-    <div>
-      {children}
-    </div>
-  </>
+    <>
+      <AppBar title={title} user={user}/>
+      <div>
+        {children}
+      </div>
+    </>
   );
-}
+};
