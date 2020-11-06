@@ -1,7 +1,6 @@
 import firebase from 'firebase';
 import { Drawer, makeStyles, Link, List, ListItem, ListItemIcon, ListItemText, Theme, useTheme } from '@material-ui/core';
 import { Home, Settings } from '@material-ui/icons';
-
 import React from 'react';
 import { Link as RouterLink} from 'react-router-dom';
 

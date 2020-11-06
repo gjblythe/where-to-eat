@@ -7,8 +7,6 @@ import Routes from './components/Routes';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
 import { firebaseConfig } from './firebaseConfig';
-import Login from './components/SignIn';
-
 
 firebase.initializeApp(firebaseConfig);
 
