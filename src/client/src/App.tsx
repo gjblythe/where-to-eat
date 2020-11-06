@@ -26,7 +26,7 @@ export default () => {
       }),
     [prefersDarkMode],
   );
-  console.log(user)
+
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline/>
