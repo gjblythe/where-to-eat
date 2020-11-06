@@ -5,7 +5,6 @@ import { ILocationProps, ISearchProps } from '../../domains/locations';
 import LocationCards from './LocationCards';
 import SearchForm from './SearchForm';
 import LoadingSpinner from '../shared/LoadingSpinner';
-// import SavedSearches from './SavedSearches';
 
 interface IProps {
   loading: boolean;
