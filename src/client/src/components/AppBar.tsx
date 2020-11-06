@@ -5,6 +5,7 @@ import Menu from './menu/Menu';
 
 interface IProps {
   title: string;
+  user?: firebase.default.User;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -12,26 +13,31 @@ const useStyles = makeStyles((theme: Theme) => ({
     flexGrow: 1,
     padding: theme.spacing(1),
   },
+  location: {
+    margin: theme.spacing(2),
+  }
 }))
 
-export default ({title}: IProps) => {
+export default ({title, user}: IProps) => {
   const classes = useStyles();
   const [menuToggle, setMenuToggel] = React.useState(false);
   const toggleMenu = () => setMenuToggel(!menuToggle);
   return (
     <AppBar position={'sticky'}>
       <Toolbar>
-        <IconButton edge={'start'} color={'inherit'} aria-label={'menu'} onClick={toggleMenu}>
-          <MenuIcon/>
-        </IconButton>
+        {user && 
+          <IconButton edge={'start'} color={'inherit'} aria-label={'menu'} onClick={toggleMenu}>
+            <MenuIcon/>
+          </IconButton>
+        }
         <Typography className={classes.title} variant={'h6'}>
           Where To Eat
         </Typography>
-        <Typography variant={'caption'}>
+        <Typography className={classes.location} variant={'caption'}>
           {title}
         </Typography>
       </Toolbar>
-      <Menu open={menuToggle} onClose={() => setMenuToggel(false)}/>
+      <Menu open={menuToggle} onClose={() => setMenuToggel(false)} user={user}/>
     </AppBar>
   );
 };

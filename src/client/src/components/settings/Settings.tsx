@@ -3,6 +3,9 @@ import React from 'react';
 import AppPage from '../AppPage';
 import ThemeButton from './ThemeButton';
 
+interface IProps {
+  user: firebase.default.User;
+}
 const useStyles = makeStyles((theme: Theme) => ({
   form: {
    margin: theme.spacing(2),
@@ -10,10 +13,10 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-export default () => {
+export default ({user}: IProps) => {
   const classes = useStyles();
   return (
-    <AppPage title={'Settings'}>
+    <AppPage title={'Settings'} user={user}>
       <Container maxWidth={'md'}>
         <Paper className={classes.form}>
           <Grid container>
@@ -23,4 +26,4 @@ export default () => {
       </Container>
     </AppPage>
   );
-}
+};
