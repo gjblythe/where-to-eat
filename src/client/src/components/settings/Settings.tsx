@@ -15,6 +15,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 export default ({user}: IProps) => {
   const classes = useStyles();
+
   return (
     <AppPage title={'Settings'} user={user}>
       <Container maxWidth={'md'}>

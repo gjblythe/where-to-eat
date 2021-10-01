@@ -73,11 +73,12 @@ const searchLocation = () => {
             <FormControlLabel
               className={classes.field}
               control={
-            <Switch
-              color={'primary'}
-              onChange={updateCategory}
-            />}
-            label="Vegetarian/Vegan"
+                <Switch
+                  color={'primary'}
+                  onChange={updateCategory}
+                />
+              }
+            label="Veg/Vegan"
             />
           </Grid>
         </Grid>

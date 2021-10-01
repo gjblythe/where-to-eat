@@ -1,5 +1,5 @@
 import firebase from 'firebase';
-import { Button, Card, CardHeader, Container, Link, makeStyles, Theme} from '@material-ui/core';
+import { Card, CardHeader, Container, Link, makeStyles, Theme} from '@material-ui/core';
 import React from 'react';
 import AppPage from './AppPage';
 import LoadingSpinner from './shared/LoadingSpinner';
